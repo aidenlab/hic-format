@@ -29,7 +29,7 @@
 |nChrs|	Number of chromosomes|int||		
 ||*List of chromosome lengths (n = nChrs)*||
 |chrName	|Chromosome name	|String||	
-|chrLength|	Chromosome length |	int	||
+|chrLength|	Chromosome length |	long	||
 |||||
 |nBpResolutions	|Number of base pair resolutions|	int||	
 ||*List of bin sizes for bp resolution levels (n = nBpResolutions)*||
@@ -125,7 +125,7 @@ A block represents a square sub-matrix of a contact map.
 
 | Field |	Description|	Type |	Value |
 |------|------------|------|-------|
-|nBytesV5|	Number of bytes for the “version 5” footer, that is everything up to the normalized expected vectors.  This field (*nBytesV5*) is not included, so the total number of bytes between ```footerPosition``` and ```nNormVectors```  is ```nBytesV5 + 4```. |int||	
+|nBytesV5|	Number of bytes for the “version 5” footer, that is everything up to the normalized expected vectors.  This field (*nBytesV5*) is not included, so the total number of bytes between ```footerPosition``` and ```nNormVectors```  is ```nBytesV5 + 4```. |long||	
 
 #### Master index
 
@@ -147,7 +147,7 @@ A block represents a square sub-matrix of a contact map.
 ||*List of expected value vectors (n = nExpectedValueVectors)*||
 |unit|	Bin units either FRAG or BP.	|String	|FRAG : BP|
 |binSize	|Bin (grid) size for this calculation	|int||	
-|nValues	|Size of the vector|	int||	
+|nValues	|Size of the vector|	long||	
 ||
 |*List of expected values (n = nValues)*|
 |value	|Expected value|	double||	
@@ -167,7 +167,7 @@ A block represents a square sub-matrix of a contact map.
 |type|	Indicates type of normalization	|String|	VC:KR:INTER_KR:INTER_VC:GW_KR:GW_VC|
 |unit	|Bin units either FRAG or BP.	|String|	FRAG : BP|
 |binSize|	Bin (grid) size for this calculation	|int||	
-|nValues|	Size of the vector	|int	||
+|nValues|	Size of the vector	|long	||
 ||
 ||*List of expected values (n = nValues)*||
 |value	|Expected value	|double||	
@@ -189,7 +189,7 @@ A block represents a square sub-matrix of a contact map.
 |position|	File position of value array|	long	||
 |nBytes|	Size in bytes of value array	|int	||
 ||*Normalization vector arrays (repeat for each entry above)*||
-|nValues|	Number of values in array|	int||	
+|nValues|	Number of values in array|	long||	
 ||*Normalization vector values (n=  nValues)*||
 
 
