@@ -19,7 +19,9 @@
 |Magic|HiC magic string|String|HIC|
 |Version|Version number|int|8|
 |masterIndexPosition|File position of master index|long||
-|genomeId|	Genome identifier (e.g. hg19, mm9, etc)|	String||	
+|genomeId| Genome identifier (e.g. hg19, mm9, etc)|String||
+|normVectorIndex|  File position for normalization vectors|long||
+|normVectorLength|  Length to read for normalization vectors|long||
 ||||
 |nAttributes	|Number of key-value pair attributes|	int||
 ||*List of key-value pair attributes (n = nAttributes).  See notes on common attributes below.*||
