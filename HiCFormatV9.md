@@ -18,7 +18,7 @@
 |------|------------|------|-------|
 |Magic|HiC magic string|String|HIC|
 |Version|Version number|int|8|
-|footerPosition|File position of the Footer section, containing the master index, expected values, and normalization vectors. |long||
+|masterIndexPosition|File position of master index|long||
 |genomeId|	Genome identifier (e.g. hg19, mm9, etc)|	String||	
 ||||
 |nAttributes	|Number of key-value pair attributes|	int||
@@ -72,9 +72,9 @@ contact data.
 |binSize|	The bin size in base-pairs or fragments	|int||	
 |blockSize			|Dimension of each block in bins.  Blocks are square, so the total number of bins is ```blockSize^2```.  See description of grid strcture below|int||
 |blockColumnCount|The number of columns in the grid of blocks.  |int||			
-|blockCount|The number of blocks stored in the file.  Note empty blocks are not stored.|||			
+|blockCount|The number of blocks.  Note empty blocks are not stored.|int||			
 |||||
-|*Block index. Repeat for each resolution  (n = nResolutions)*||
+|*Block index. Repeat for each block  (n = blockCount).  IMPORTANT: block index entries must be ordered by blockNumber*||
 |blockNumber	|Numeric id for block.  This is the linear position of the block in the grid when counted in row-major order.   ```blockNumber = column * blockColumnCount + row``` where first row and column **0**	|int|	
 |blockPosition|	File position of block|	long|	
 |blockSizeBytes	|Size of block in bytes| int|	
@@ -125,7 +125,7 @@ A block represents a square sub-matrix of a contact map.
 
 | Field |	Description|	Type |	Value |
 |------|------------|------|-------|
-|nBytesV5|	Number of bytes for the “version 5” footer, that is everything up to the normalized expected vectors.  This field (*nBytesV5*) is not included, so the total number of bytes between ```footerPosition``` and ```nNormVectors```  is ```nBytesV5 + 4```. |int||	
+|nBytesV5|	Number of bytes for the “version 5” footer, that is everything up to the normalized expected vectors	|int||	
 
 #### Master index
 
