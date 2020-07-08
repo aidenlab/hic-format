@@ -17,7 +17,7 @@
 |Field | Description |	Type | Value |
 |------|------------|------|-------|
 |Magic|HiC magic string|String|HIC|
-|Version|Version number|int|8|
+|Version|Version number|int|9|
 |footerPosition|File position of the Footer section, containing the master index, expected values, and normalization vectors. |long||
 |genomeId|	Genome identifier (e.g. hg19, mm9, etc)|	String||	
 ||||
