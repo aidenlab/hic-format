@@ -72,8 +72,8 @@ contact data.
 |percent5|	Estimate of 5th percentile of counts among occupied bins. **Not currently used**|float|0|		
 |percent95|	Estimate of 95th percentile of counts among occupied bins **Not currently used**|float|0|		
 |binSize|	The bin size in base-pairs or fragments	|int||	
-|blockSize			|Dimension of each block in bins.  Blocks are square, so the total number of bins is ```blockSize^2```.  See description of grid strcture below|int||
-|blockColumnCount|The number of columns in the grid of blocks.  |int||			
+|blockSize			|Dimension of each block in bins.  In v9 interchromosomal blocks are square, so the total number of bins is ```blockSize^2```. But intrachromosomal blocks are rotated and not necessarily square. In this case, blockSize specifies the dimension of the block along the diagonal axis.  See description of grid strcture below|int||
+|blockColumnCount|The number of columns in the grid of blocks. For v9 intrachromosomal block structure, this specifies the number of columns in the grid of blocks along the diagonal. |int||			
 |blockCount|The number of blocks.  Note empty blocks are not stored.|int||			
 |||||
 |*Block index. Repeat for each block  (n = blockCount).  IMPORTANT: block index entries must be ordered by blockNumber*||
