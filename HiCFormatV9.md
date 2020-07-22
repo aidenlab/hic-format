@@ -152,12 +152,12 @@ A block represents a square sub-matrix of a contact map.
 |nValues	|Size of the vector|	long||	
 ||
 |*List of expected values (n = nValues)*|
-|value	|Expected value|	double||	
+|value	|Expected value|	float||	
 |nChrScaleFactors| Number of chromosome normalization factors| int||
 ||
 ||*List of normalization factors (n = nChrScaleFactors)*||
 |chrIndex|	Chromosome index|	int||	
-|chrScaleFactor|	Chromosome scale factor	|double||	
+|chrScaleFactor|	Chromosome scale factor	|float||	
 
 
 #### Normalized expected value vectors
@@ -172,27 +172,28 @@ A block represents a square sub-matrix of a contact map.
 |nValues|	Size of the vector	|long	||
 ||
 ||*List of expected values (n = nValues)*||
-|value	|Expected value	|double||	
+|value	|Expected value	|float||	
 ||
 |nChrScaleFactors|Number of normalizatoin factos for this vector|||
 ||*List of normalization factors (n = nChrScaleFactors)*||
 |chrIndex|	Chromosome index	|int	||
-|chrScaleFactor|	Chromosome scale factor	|double||	
+|chrScaleFactor|	Chromosome scale factor	|float||	
 
-#### Normalization vectors
+#### Normalization vectors (indexed)
 | Field |	Description|	Type |	Value |
 |------|------------|------|-------|
 |nNormVectors|	Number of normalization vectors |	int||	
-||*List of normalization vectors (n=  nNormalizationVectors)*||
+||*Index of normalization vectors (n=  nNormalizationVectors)*||
 |type	|Indicates type of normalization	|String|	VC:KR:INTER_KR:INTER_VC:GW_KR:GW_VC|
 |chrIdx|	Chromosome index	|int|	|
 |unit|	Bin units either FRAG or BP.|	String|	FRAG : BP|
 |binSize	|Resolution 	|int||	
 |position|	File position of value array|	long	||
-|nBytes|	Size in bytes of value array	|int	||
+|nBytes|	Size in bytes of value array	| long	||
 ||*Normalization vector arrays (repeat for each entry above)*||
 |nValues|	Number of values in array|	long||	
 ||*Normalization vector values (n=  nValues)*||
+| value | Norm value | float ||
 
 
 
