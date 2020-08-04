@@ -234,9 +234,9 @@ can be inferred upon reading by tansposition.
 
 #### Intrachromosomal Block matrix representation
 
-For intrachromosomal matrices, blocks are stored in a rotated manner, with the axes defined along the diagonal and perpendicular to the diagonal. A visual example of this is included at https://bcm.box.com/v/hic-file-version-9
+For intrachromosomal matrices, blocks are stored in a rotated manner, with the axes defined along the diagonal and perpendicular to the diagonal. A visual example of this is included at [https://bcm.box.com/v/hic-file-version-9](https://bcm.box.com/v/hic-file-version-9)
 
-Furthermore, the block size increases by a factor of 2 along the anti-diagonal axis, as the number of contacts also decrease further from the diagonal. This allows for a natural and dynamic block size to decrease overal file size.
+Furthermore, the block size increases by a factor of 2 along the anti-diagonal axis, as the number of contacts also decrease further from the diagonal. This allows for a natural and dynamic block size to decrease overall file size.
 
 The spatial unit for a block is a still a ```bin```, which can be still computed from a genomic position with the formula
 
