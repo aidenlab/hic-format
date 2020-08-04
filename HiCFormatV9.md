@@ -231,9 +231,55 @@ and in code, this parameter is referred to as **blockBinCount**.
 For intra chromosome matrices (chr1 == chr2) only the lower diagonal is stored (row >= column).  The upper diagonal
 can be inferred upon reading by tansposition.  
 
+
+#### Intrachromosomal Block matrix representation
+
+For intrachromosomal matrices, blocks are stored in a rotated manner, with the axes defined along the diagonal and perpendicular to the diagonal. A visual example of this is included at https://bcm.box.com/v/hic-file-version-9
+
+Furthermore, the block size increases by a factor of 2 along the anti-diagonal axis, as the number of contacts also decrease further from the diagonal. This allows for a natural and dynamic block size to decrease overal file size.
+
+The spatial unit for a block is a still a ```bin```, which can be still computed from a genomic position with the formula
+
+```bin = floor(position / binSize)```.
+
+The origin of a block is then
+
+```binX = floor(x / binsSize), binY = floor(y / binSize)```
+
+where x and y are genomic positions in either base pairs or fragment number.
+
+To identify the block number data is stored in, we calculate
+
+```
+position_along_diagonal = (binX + binY) / 2 / blockBinCount + 1;
+position_along_anti_diagonal = log2(1 + Math.abs(binX - binY) / Math.sqrt(2) / blockBinCount);
+block_number = position_along_anti_diagonal * blockColumnCount + positionAlongDiagonal
+```
+
+Because the 2D heatmap viewers are often at a 45 degree rotation from the representation of the block, it is necessary to identify all the blocks that overlap this region. For a rectangular region spanning binX1 to binX2 and binY1 to binY2, to rotation along the diagonal and antidiagonal correspond to:
+
+```
+position_along_diagonal1 = (binX1 + binY1) / 2 / blockBinCount;
+position_along_diagonal2 = (binX2 + binY2) / 2 / blockBinCount + 1;
+
+position_along_anti_diagonal1 = log2(1 + Math.abs(binX1 - binY2) / Math.sqrt(2) / blockBinCount);
+position_along_anti_diagonal2 = log2(1 + Math.abs(binX2 - binY1) / Math.sqrt(2) / blockBinCount);
+
+```
+Since the diagonal may be contained in the viewer, we may need to calculate
+```
+
+min_position_along_anti_diagonal = Math.min(position_along_anti_diagonal1, position_along_anti_diagonal2);
+max_position_along_anti_diagonal = Math.max(translatedNearerDepth, translatedFurtherDepth) + 1;
+
+```
+
+This calculates a permissive region for the viewer to ensure all data is captured for the region.
+
+
 #### Block matrix representation
 
-The spatial unit for a block is a ```bin```, which can be computed from a genomic position with the formulat
+The spatial unit for a block is a ```bin```, which can be computed from a genomic position with the formula
 
 ```bin = floor(position / binSize)```.
 
