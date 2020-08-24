@@ -270,7 +270,7 @@ Since the diagonal may be contained in the viewer, we may need to calculate
 ```
 
 min_position_along_anti_diagonal = Math.min(position_along_anti_diagonal1, position_along_anti_diagonal2);
-max_position_along_anti_diagonal = Math.max(translatedNearerDepth, translatedFurtherDepth) + 1;
+max_position_along_anti_diagonal = Math.max(position_along_anti_diagonal1, position_along_anti_diagonal2) + 1;
 
 ```
 
