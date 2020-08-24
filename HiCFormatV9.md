@@ -18,10 +18,10 @@
 |------|------------|------|-------|
 |Magic|HiC magic string|String|HIC|
 |Version|Version number|int|9|
-|masterIndexPosition|File position of master index|long||
+|footerPosition|File position of footer|long||
 |genomeId| Genome identifier (e.g. hg19, mm9, etc)|String||
-|normVectorIndex|  File position for normalization vectors|long||
-|normVectorLength|  Length to read for normalization vectors|long||
+|normVectorIndex|  File position for normalization vectors|long|| (ADDED FROM v8)
+|normVectorLength|  Length to read for normalization vectors|long|| (ADDED FROM v8)
 ||||
 |nAttributes	|Number of key-value pair attributes|	int||
 ||*List of key-value pair attributes (n = nAttributes).  See notes on common attributes below.*||
@@ -31,7 +31,7 @@
 |nChrs|	Number of chromosomes|int||		
 ||*List of chromosome lengths (n = nChrs)*||
 |chrName	|Chromosome name	|String||	
-|chrLength|	Chromosome length |	long	||
+|chrLength|	Chromosome length |	long	|| (CHANGED FROM v8)
 |||||
 |nBpResolutions	|Number of base pair resolutions|	int||	
 ||*List of bin sizes for bp resolution levels (n = nBpResolutions)*||
@@ -97,8 +97,8 @@ A block represents a square sub-matrix of a contact map.
 |binXOffset | X offset for the contact records in this block.  The binX value below is relative to this offset.||
 |binYOffset | Y offset for the contact records in this block.  The binX value below is relative to this offset.
 |useFloatContact | Flag indicating the ```value``` field in contact records for this block are recorded with data type ```float```.  If == 1 a ```float``` is used, otherwise type is ```short```| byte |
-|useIntXPos | Flag indicating the ```recordCount``` and ```binX``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte |
-|useIntYPos | Flag indicating the ```rowCount``` and ```rowNumber``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte |
+|useIntXPos | Flag indicating the ```recordCount``` and ```binX``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte | (ADDED FROM v8)
+|useIntYPos | Flag indicating the ```rowCount``` and ```rowNumber``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte | (ADDED FROM v8)
 
 |matrixRepresentation | Representation of matrix used for the contact records.  If == 1 the representation is a ```list of rows```, if == 2 ```dense```. | byte |
 |blockData| The block matrix data.  See descriptions below, also  in the notes section.
@@ -107,14 +107,14 @@ A block represents a square sub-matrix of a contact map.
 
 |Field	|Description|	Type|	Value|
 |------|------------|------|-------|
-|rowCount | Number or rows. The data type is determined by the ```useIntYPos``` flag above. | int : short ||
+|rowCount | Number or rows. The data type is determined by the ```useIntYPos``` flag above. | int : short || (CHANGED FROM V8)
 ||
 |*rows (n = rowCount)*
-|rowNumber | Matrix row number, first row is ```0```. The data type is determined by the ```useIntYPos``` flag above. | int : short ||
-|recordCount | Number of records for this row. Row is sparse, zeroes are not recorded. The data type is determined by the ```useIntXPos``` flag above. | int : short ||
+|rowNumber | Matrix row number, first row is ```0```. The data type is determined by the ```useIntYPos``` flag above. | int : short || (CHANGED FROM V8)
+|recordCount | Number of records for this row. Row is sparse, zeroes are not recorded. The data type is determined by the ```useIntXPos``` flag above. | int : short || (CHANGED FROM V8)
 ||
 |*contact records (n = cellCount)*||
-|binX	|X axis index. The data type is determined by the ```useIntXPos``` flag above. |	int : short||
+|binX	|X axis index. The data type is determined by the ```useIntXPos``` flag above. |	int : short|| (CHANGED FROM V8)
 |value	|Value (counts or score). The data type is determined by the ```useFloat``` flag above.|	float : short||	
 
 ##### Block data - dense
@@ -130,7 +130,7 @@ A block represents a square sub-matrix of a contact map.
 
 | Field |	Description|	Type |	Value |
 |------|------------|------|-------|
-|nBytesV5|	Number of bytes for the “version 5” footer, that is everything up to the normalized expected vectors	|long||	
+|nBytesV5|	Number of bytes for the “version 5” footer, that is everything up to the normalized expected vectors	|long|| (CHANGED FROM V8)
 
 #### Master index
 
@@ -152,10 +152,10 @@ A block represents a square sub-matrix of a contact map.
 ||*List of expected value vectors (n = nExpectedValueVectors)*||
 |unit|	Bin units either FRAG or BP.	|String	|FRAG : BP|
 |binSize	|Bin (grid) size for this calculation	|int||	
-|nValues	|Size of the vector|	long||	
+|nValues	|Size of the vector|	long||	(CHANGED FROM V8)
 ||
 |*List of expected values (n = nValues)*|
-|value	|Expected value|	float||	
+|value	|Expected value|	float||	(CHANGED FROM V8)
 |nChrScaleFactors| Number of chromosome normalization factors| int||
 ||
 ||*List of normalization factors (n = nChrScaleFactors)*||
@@ -172,10 +172,10 @@ A block represents a square sub-matrix of a contact map.
 |type|	Indicates type of normalization	|String|	VC:KR:INTER_KR:INTER_VC:GW_KR:GW_VC|
 |unit	|Bin units either FRAG or BP.	|String|	FRAG : BP|
 |binSize|	Bin (grid) size for this calculation	|int||	
-|nValues|	Size of the vector	|long	||
+|nValues|	Size of the vector	|long	|| (CHANGED FROM V8)
 ||
 ||*List of expected values (n = nValues)*||
-|value	|Expected value	|float||	
+|value	|Expected value	|float||	(CHANGED FROM V8)
 ||
 |nChrScaleFactors|Number of normalizatoin factos for this vector|||
 ||*List of normalization factors (n = nChrScaleFactors)*||
@@ -194,9 +194,9 @@ A block represents a square sub-matrix of a contact map.
 |position|	File position of value array|	long	||
 |nBytes|	Size in bytes of value array	| long	||
 ||*Normalization vector arrays (repeat for each entry above)*||
-|nValues|	Number of values in array|	long||	
+|nValues|	Number of values in array|	long||	(CHANGED FROM V8)
 ||*Normalization vector values (n=  nValues)*||
-| value | Norm value | float ||
+| value | Norm value | float || (CHANGED FROM V8)
 
 
 
@@ -251,7 +251,7 @@ where x and y are genomic positions in either base pairs or fragment number.
 To identify the block number data is stored in, we calculate
 
 ```
-position_along_diagonal = (binX + binY) / 2 / blockBinCount + 1;
+position_along_diagonal = (binX + binY) / 2 / blockBinCount;
 position_along_anti_diagonal = log2(1 + Math.abs(binX - binY) / Math.sqrt(2) / blockBinCount);
 block_number = position_along_anti_diagonal * blockColumnCount + positionAlongDiagonal
 ```
