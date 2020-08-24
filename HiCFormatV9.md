@@ -149,12 +149,12 @@ A block represents a square sub-matrix of a contact map.
 |------|------------|------|-------|--------|
 |nExpectedValueVectors|	Number of expected value vectors to follow.  These are expected values from the non-normalized observed matrix.| int||	
 ||
-||*List of expected value vectors (n = nExpectedValueVectors)*||
+|*List of expected value vectors (n = nExpectedValueVectors)*||
 |unit|	Bin units either FRAG or BP.	|String	|FRAG : BP||
 |binSize	|Bin (grid) size for this calculation	|int|||	
 |nValues	|Size of the vector|	long||	(CHANGED FROM V8)|
 ||
-|*List of expected values (n = nValues)*|
+||*List of expected values (n = nValues)*|
 |value	|Expected value|	float||	(CHANGED FROM V8)|
 |nChrScaleFactors| Number of chromosome normalization factors| int|||
 ||
