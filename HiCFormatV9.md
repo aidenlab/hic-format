@@ -97,8 +97,8 @@ A block represents a square sub-matrix of a contact map.
 |binXOffset | X offset for the contact records in this block.  The binX value below is relative to this offset.|||
 |binYOffset | Y offset for the contact records in this block.  The binX value below is relative to this offset.|||
 |useFloatContact | Flag indicating the ```value``` field in contact records for this block are recorded with data type ```float```.  If == 1 a ```float``` is used, otherwise type is ```short```| byte ||
-|useIntXPos | Flag indicating the ```recordCount``` and ```binX``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte | (ADDED FROM v8)|
-|useIntYPos | Flag indicating the ```rowCount``` and ```rowNumber``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte | (ADDED FROM v8)|
+|useIntXPos | Flag indicating the ```recordCount``` and ```binX``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte || (ADDED FROM v8)|
+|useIntYPos | Flag indicating the ```rowCount``` and ```rowNumber``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte || (ADDED FROM v8)|
 
 |matrixRepresentation | Representation of matrix used for the contact records.  If == 1 the representation is a ```list of rows```, if == 2 ```dense```. | byte |
 |blockData| The block matrix data.  See descriptions below, also  in the notes section.
