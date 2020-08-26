@@ -23,8 +23,8 @@
 |normVectorIndexPosition|  File position for normalization vector index|long|| (ADDED FROM v8)|
 |normVectorIndexLength|  Length to read for normalization vector index|long|| (ADDED FROM v8)|
 
-#### Attribute table
-*List of key-value pair attributes (n = nAttributes).  See notes on common attributes below.*
+#### Attribute list
+*List of key-value pair attributes.  See notes on common attributes below.*
 
 |Field | Description |	Type | Value | V9 change |
 |------|------------|------|-------|------|
@@ -33,8 +33,10 @@
 |key	|Attribute key|	String	|||
 |value|Attribute value|		String|||
 
-#### Chromosome Table
-*List of chromosome name and lenthgs (n = nChrs)*
+#### Chromosome list
+
+*List of chromosome name and lengths*
+
 |Field | Description |	Type | Value | V9 change |
 |------|------------|------|-------|------|
 |nChrs|	Number of chromosomes|int|||		
@@ -42,24 +44,30 @@
 |chrName	|Chromosome name	|String|||	
 |chrLength|	Chromosome length |	long	|| (CHANGED FROM v8)|
 
-#### BP Resolution Table
-*List of base pair resolutions*
+#### Base-pair resolution list
+
+*List of base-pair resolutions*
+
 |Field | Description |	Type | Value | V9 change |
 |------|------------|------|-------|------|
 |nBpResolutions	|Number of base pair resolutions|	int|||	
 |*Repeat for each resolution (n = nBpResolutions)*|||
 |resBP	|Bin size in base pairs	|int|||	
 
-#### Frag Resolution Table
-*List of bin sizes for fragment resolution levels (n = nFragResolutions)*
+#### Fragment resolution list
+
+*List of bin sizes for fragment resolution levels*
+
 |Field | Description |	Type | Value | V9 change |
 |------|------------|------|-------|------|
 |nFragResolutions	|Number of fragment resolutions	|int|||	
 |*Repeat for each resolution (n = nFragResolutions)*|
 |resFrag	|Bin size in fragment units (1, 2, 5, etc)|	int|||
 
-#### Fragment site positions table
+#### Fragment site positions list
+
 *List of fragment site positions per chromosome, in same order as chromosome list above (n = nChrs).  This section absent if nFragResolutions = 0.*
+
 |Field | Description |	Type | Value | V9 change |
 |------|------------|------|-------|------|
 |nSites|	Number of sites for this chromosome|	int|||	
@@ -83,8 +91,14 @@ contact data.
 |------|------------|------|-------|--------|
 |chr1Idx| Index for chromosome 1.  This is the index into the array of chromosomes defined in the header above.  The first chromosome has index **0**.|	int|||	
 |chr2Idx| Index for chromosome 2. |	int	|||
-|nResolutions	|Total number of resolutions for this chromosome-chromosome pair, including base pair and fragment resolutions.	|int|||	
-||*Resolution metadata.  Repeat for each resolution. (n = nResolutions)*|||
+|nResolutions	|Total number of resolutions for this chromosome-chromosome pair, including base pair and fragment resolutions.	|int|||
+
+#### Resolution (zoom level) metadata
+
+*The section below is repeated for each resolution (n = nResolutions)* 
+
+|Field	|Description|	Type|	Value| v9 Change |
+|------|------------|------|-------|--------|
 |unit|	Distance unit, base-pairs or fragments	|String	|BP or FRAG||
 |resIdx	|Index number for this resolution level, an Array index into the bin size list of the header, first element is **0**. |	int|||	
 |sumCounts|	Sum of all counts (or scores) across all bins at current resolution.|	float|||	
@@ -95,19 +109,22 @@ contact data.
 |blockSize			|Dimension of each block in bins.  In v9 interchromosomal blocks are square, so the total number of bins is ```blockSize^2```. But intrachromosomal blocks are rotated and not necessarily square. In this case, blockSize specifies the dimension of the block along the diagonal axis.  See description of grid strcture below|int|||
 |blockColumnCount|The number of columns in the grid of blocks. For v9 intrachromosomal block structure, this specifies the number of columns in the grid of blocks along the diagonal. |int|||			
 |blockCount|The number of blocks.  Note empty blocks are not stored.|int|||			
-||||||
-|*Block index. Repeat for each block  (n = blockCount).  IMPORTANT: block index entries must be ordered by blockNumber*|||
+
+**Block index entries**
+*The entries in the tabel below are repeated for each block of this resolution level  (n = blockCount).  Note that this list is nested in the resolution 
+metadata list -- each resolution has a block index.  **IMPORTANT: block index entries must be ordered by blockNumber**
+
+|Field	|Description|	Type|	Value| v9 Change |
+|------|------------|------|-------|--------|
 |blockNumber	|Numeric id for block.  This is the linear position of the block in the grid when counted in row-major order.   ```blockNumber = column * blockColumnCount + row``` where first row and column **0**	|int||	
-|blockPosition|	File position of block|	long||	
+|blockPosition|	File position of the start of the block |	long||	
 |blockSizeBytes	|Size of block in bytes| int||	
-|||||	
-||*Block data*|||
-| blocks | Compressed blocks for all matrices and resolutions.  See  description below.   ||||
 
+***End of Matrix metadata section***
 
-#### Block  
+### Blocks  
 
-A block represents a square sub-matrix of a contact map. 
+A block represents a square sub-matrix of a contact map.   
 
 ***Note: Blocks are indivdually compressed with ZLib***
 
@@ -119,7 +136,6 @@ A block represents a square sub-matrix of a contact map.
 |useFloatContact | Flag indicating the ```value``` field in contact records for this block are recorded with data type ```float```.  If == 1 a ```float``` is used, otherwise type is ```short```| byte ||
 |useIntXPos | Flag indicating the ```recordCount``` and ```binX``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte || (ADDED FROM v8)|
 |useIntYPos | Flag indicating the ```rowCount``` and ```rowNumber``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte || (ADDED FROM v8)|
-
 |matrixRepresentation | Representation of matrix used for the contact records.  If == 1 the representation is a ```list of rows```, if == 2 ```dense```. | byte |
 |blockData| The block matrix data.  See descriptions below, also  in the notes section.
 
