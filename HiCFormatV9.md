@@ -22,28 +22,48 @@
 |genomeId| Genome identifier (e.g. hg19, mm9, etc)|String|||
 |normVectorIndexPosition|  File position for normalization vector index|long|| (ADDED FROM v8)|
 |normVectorIndexLength|  Length to read for normalization vector index|long|| (ADDED FROM v8)|
-|||||
+
+#### Attribute table
+*List of key-value pair attributes (n = nAttributes).  See notes on common attributes below.*
+
+|Field | Description |	Type | Value | V9 change |
+|------|------------|------|-------|------|
 |nAttributes	|Number of key-value pair attributes|	int|||
-||*List of key-value pair attributes (n = nAttributes).  See notes on common attributes below.*|||
+|*Repeat for each attribute (n = nAttributes)*|||
 |key	|Attribute key|	String	|||
 |value|Attribute value|		String|||
-||||||
+
+#### Chromosome Table
+*List of chromosome name and lenthgs (n = nChrs)*
+|Field | Description |	Type | Value | V9 change |
+|------|------------|------|-------|------|
 |nChrs|	Number of chromosomes|int|||		
-||*List of chromosome lengths (n = nChrs)*|||
+|*Repeat for each chromosome (n = nChrs)*|
 |chrName	|Chromosome name	|String|||	
 |chrLength|	Chromosome length |	long	|| (CHANGED FROM v8)|
-||||||
+
+#### BP Resolution Table
+*List of base pair resolutions*
+|Field | Description |	Type | Value | V9 change |
+|------|------------|------|-------|------|
 |nBpResolutions	|Number of base pair resolutions|	int|||	
-||*List of bin sizes for bp resolution levels (n = nBpResolutions)*|||
+|*Repeat for each resolution (n = nBpResolutions)*|||
 |resBP	|Bin size in base pairs	|int|||	
-||||||
+
+#### Frag Resolution Table
+*List of bin sizes for fragment resolution levels (n = nFragResolutions)*
+|Field | Description |	Type | Value | V9 change |
+|------|------------|------|-------|------|
 |nFragResolutions	|Number of fragment resolutions	|int|||	
-||*List of bin sizes for frag resolution levels (n = nFragResolutions)*|||
+|*Repeat for each resolution (n = nFragResolutions)*|
 |resFrag	|Bin size in fragment units (1, 2, 5, etc)|	int|||
-||||||
-||*List of fragment site positions per chromosome, in same order as chromosome list above (n = nChrs).  This section absent if nFragResolutions = 0.*|||
+
+#### Fragment site positions table
+*List of fragment site positions per chromosome, in same order as chromosome list above (n = nChrs).  This section absent if nFragResolutions = 0.*
+|Field | Description |	Type | Value | V9 change |
+|------|------------|------|-------|------|
 |nSites|	Number of sites for this chromosome|	int|||	
-||*List of sites (n = nSites)*|||
+|*Repeat for each site (n = nSites)*|
 |sitePosition|	Site position in base pairs|	int|||	
 
 ## Body
