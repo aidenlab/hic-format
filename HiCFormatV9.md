@@ -20,8 +20,8 @@
 |Version|Version number|int|9||
 |footerPosition|File position of footer|long|||
 |genomeId| Genome identifier (e.g. hg19, mm9, etc)|String|||
-|normVectorIndex|  File position for normalization vectors|long|| (ADDED FROM v8)|
-|normVectorLength|  Length to read for normalization vectors|long|| (ADDED FROM v8)|
+|normVectorIndexPosition|  File position for normalization vector index|long|| (ADDED FROM v8)|
+|normVectorIndexLength|  Length to read for normalization vector index|long|| (ADDED FROM v8)|
 |||||
 |nAttributes	|Number of key-value pair attributes|	int|||
 ||*List of key-value pair attributes (n = nAttributes).  See notes on common attributes below.*|||
