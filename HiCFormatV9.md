@@ -111,7 +111,7 @@ contact data.
 |blockCount|The number of blocks.  Note empty blocks are not stored.|int|||			
 
 **Block index entries**
-*The entries in the tabel below are repeated for each block of this resolution level  (n = blockCount).  Note that this list is nested in the resolution 
+*The entries in the table below are repeated for each block of this resolution level  (n = blockCount).  Note that this list is nested in the resolution 
 metadata list -- each resolution has a block index.  **IMPORTANT: block index entries must be ordered by blockNumber**
 
 |Field	|Description|	Type|	Value| v9 Change |
@@ -209,12 +209,10 @@ A block represents a square sub-matrix of a contact map.
 |unit	|Bin units either FRAG or BP.	|String|	FRAG : BP||
 |binSize|	Bin (grid) size for this calculation	|int|||	
 |nValues|	Size of the vector	|long	|| (CHANGED FROM V8)|
-||
-||*List of expected values (n = nValues)*||
+|*List of expected values (n = nValues)*|
 |value	|Expected value	|float||	(CHANGED FROM V8)|
-||
 |nChrScaleFactors|Number of normalizatoin factos for this vector||||
-||*List of normalization factors (n = nChrScaleFactors)*||
+|*List of normalization factors (n = nChrScaleFactors)*|
 |chrIndex|	Chromosome index	|int	|||
 |chrScaleFactor|	Chromosome scale factor	|float|| (CHANGED FROM V8)|	
 
