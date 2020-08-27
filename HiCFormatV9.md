@@ -29,6 +29,7 @@
 |Field | Description |	Type | Value | V9 change |
 |------|------------|------|-------|------|
 |nAttributes	|Number of key-value pair attributes|	int|||
+||
 |*Repeat for each attribute (n = nAttributes)*|||
 |key	|Attribute key|	String	|||
 |value|Attribute value|		String|||
@@ -40,6 +41,7 @@
 |Field | Description |	Type | Value | V9 change |
 |------|------------|------|-------|------|
 |nChrs|	Number of chromosomes|int|||		
+||
 |*Repeat for each chromosome (n = nChrs)*|
 |chrName	|Chromosome name	|String|||	
 |chrLength|	Chromosome length |	long	|| (CHANGED FROM v8)|
@@ -51,6 +53,7 @@
 |Field | Description |	Type | Value | V9 change |
 |------|------------|------|-------|------|
 |nBpResolutions	|Number of base pair resolutions|	int|||	
+||
 |*Repeat for each resolution (n = nBpResolutions)*|||
 |resBP	|Bin size in base pairs	|int|||	
 
@@ -71,6 +74,7 @@
 |Field | Description |	Type | Value | V9 change |
 |------|------------|------|-------|------|
 |nSites|	Number of sites for this chromosome|	int|||	
+||
 |*Repeat for each site (n = nSites)*|
 |sitePosition|	Site position in base pairs|	int|||	
 
@@ -149,7 +153,7 @@ A block represents a square sub-matrix of a contact map.
 |rowNumber | Matrix row number, first row is ```0```. The data type is determined by the ```useIntYPos``` flag above. | int : short || (CHANGED FROM V8)|
 |recordCount | Number of records for this row. Row is sparse, zeroes are not recorded. The data type is determined by the ```useIntXPos``` flag above. | int : short || (CHANGED FROM V8)|
 ||
-|*contact records (n = cellCount)*||
+|*contact records (n = cellCount)*|
 |binX	|X axis index. The data type is determined by the ```useIntXPos``` flag above. |	int : short|| (CHANGED FROM V8)|
 |value	|Value (counts or score). The data type is determined by the ```useFloat``` flag above.|	float : short|||	
 
@@ -220,16 +224,18 @@ A block represents a square sub-matrix of a contact map.
 | Field |	Description|	Type |	Value | v9 change | 
 |------|------------|------|-------|---------|
 |nNormVectors|	Number of normalization vectors |	int|||
-||*Index of normalization vectors (n=  nNormalizationVectors)*||
+|*Index of normalization vectors (n=  nNormalizationVectors)*|
 |type	|Indicates type of normalization	|String|	VC:KR:INTER_KR:INTER_VC:GW_KR:GW_VC||
 |chrIdx|	Chromosome index	|int|	||
 |unit|	Bin units either FRAG or BP.|	String|	FRAG : BP||
 |binSize	|Resolution 	|int|||	
 |position|	File position of value array|	long	|||
 |nBytes|	Size in bytes of value array	| long	|| (CHANGED FROM V8)|
-||*Normalization vector arrays (repeat for each entry above)*||
+||
+|*Normalization vector arrays (repeat for each entry above)*|
 |nValues|	Number of values in array|	long||	(CHANGED FROM V8)|
-||*Normalization vector values (n=  nValues)*||
+||
+|*Normalization vector values (n=  nValues)*|
 | value | Norm value | float || (CHANGED FROM V8)|
 
 
