@@ -30,13 +30,9 @@
 |------|------------|------|-------|------|
 |nAttributes	|Number of key-value pair attributes|	int|||
 ||
-
-
-   |Field | Description |	Type | Value | V9 change |
-   |------|------------|------|-------|------|
-   |*Repeat for each attribute (n = nAttributes)*|||
-   |key	|Attribute key|	String	|||
-   |value|Attribute value|		String|||
+|*Repeat for each attribute (n = nAttributes)*|||
+|key	|Attribute key|	String	|||
+|value|Attribute value|		String|||
 
 #### Chromosome list
 
@@ -68,6 +64,7 @@
 |Field | Description |	Type | Value | V9 change |
 |------|------------|------|-------|------|
 |nFragResolutions	|Number of fragment resolutions	|int|||	
+||
 |*Repeat for each resolution (n = nFragResolutions)*|
 |resFrag	|Bin size in fragment units (1, 2, 5, etc)|	int|||
 
@@ -117,14 +114,9 @@ contact data.
 |blockSize			|Dimension of each block in bins.  In v9 interchromosomal blocks are square, so the total number of bins is ```blockSize^2```. But intrachromosomal blocks are rotated and not necessarily square. In this case, blockSize specifies the dimension of the block along the diagonal axis.  See description of grid strcture below|int|||
 |blockColumnCount|The number of columns in the grid of blocks. For v9 intrachromosomal block structure, this specifies the number of columns in the grid of blocks along the diagonal. |int|||			
 |blockCount|The number of blocks.  Note empty blocks are not stored.|int|||			
-
-**Block index entries**
-*The entries in the table below are repeated for each block of this resolution level  (n = blockCount).  Note that this list is nested in the resolution 
-metadata list -- each resolution has a block index.  **IMPORTANT: block index entries must be ordered by blockNumber**
-
-|Field	|Description|	Type|	Value| v9 Change |
-|------|------------|------|-------|--------|
-|blockNumber	|Numeric id for block.  This is the linear position of the block in the grid when counted in row-major order.   ```blockNumber = column * blockColumnCount + row``` where first row and column **0**	|int||	
+||
+|*repeat for each block (n = blockCount)|
+|blockNumber	|Numeric id for block.  This is the linear position of the block in the grid when counted in row-major order.   ```blockNumber = column * blockColumnCount + row``` where first row and column **0**. **IMPORTANT: block index entries must be ordered by blockNumber**	|int||	
 |blockPosition|	File position of the start of the block |	long||	
 |blockSizeBytes	|Size of block in bytes| int||	
 
@@ -153,13 +145,15 @@ A block represents a square sub-matrix of a contact map.
 |------|------------|------|-------|--------|
 |rowCount | Number or rows. The data type is determined by the ```useIntYPos``` flag above. | int : short || (CHANGED FROM V8)|
 ||
-|*rows (n = rowCount)*
+|*repeat for each row (n = rowCount)*
 |rowNumber | Matrix row number, first row is ```0```. The data type is determined by the ```useIntYPos``` flag above. | int : short || (CHANGED FROM V8)|
 |recordCount | Number of records for this row. Row is sparse, zeroes are not recorded. The data type is determined by the ```useIntXPos``` flag above. | int : short || (CHANGED FROM V8)|
 ||
-|*contact records (n = cellCount)*|
+|*repeat for each contact record (n = cellCount)*|
 |binX	|X axis index. The data type is determined by the ```useIntXPos``` flag above. |	int : short|| (CHANGED FROM V8)|
 |value	|Value (counts or score). The data type is determined by the ```useFloat``` flag above.|	float : short|||	
+||
+||
 
 ##### Block data - dense
 |Field	|Description|	Type|	Value|
@@ -217,9 +211,11 @@ A block represents a square sub-matrix of a contact map.
 |unit	|Bin units either FRAG or BP.	|String|	FRAG : BP||
 |binSize|	Bin (grid) size for this calculation	|int|||	
 |nValues|	Size of the vector	|long	|| (CHANGED FROM V8)|
+||
 |*List of expected values (n = nValues)*|
 |value	|Expected value	|float||	(CHANGED FROM V8)|
 |nChrScaleFactors|Number of normalizatoin factos for this vector||||
+||
 |*List of normalization factors (n = nChrScaleFactors)*|
 |chrIndex|	Chromosome index	|int	|||
 |chrScaleFactor|	Chromosome scale factor	|float|| (CHANGED FROM V8)|	
@@ -228,7 +224,8 @@ A block represents a square sub-matrix of a contact map.
 | Field |	Description|	Type |	Value | v9 change | 
 |------|------------|------|-------|---------|
 |nNormVectors|	Number of normalization vectors |	int|||
-|*Index of normalization vectors (n=  nNormalizationVectors)*|
+||
+|*Repeat for each norm vector (n=  nNormalizationVectors)*|
 |type	|Indicates type of normalization	|String|	VC:KR:INTER_KR:INTER_VC:GW_KR:GW_VC||
 |chrIdx|	Chromosome index	|int|	||
 |unit|	Bin units either FRAG or BP.|	String|	FRAG : BP||
