@@ -152,7 +152,9 @@ A block represents a square sub-matrix of a contact map.
 |*repeat for each contact record (n = recordCount)*|
 |binColumn	|Column index relative to binColumnOffset. The data type is determined by the ```useIntXPos``` flag above. |	int : short|| (CHANGED FROM V8)|
 |value	|Value (counts or score). The data type is determined by the ```useFloat``` flag above.|	float : short|||	
+||
 |*End of loop through contact records (n = recordCount)*|
+||
 |*End of loop through rows (n = rowCount)*|
 
 ##### Block data - dense
@@ -220,7 +222,7 @@ A block represents a square sub-matrix of a contact map.
 |chrIndex|	Chromosome index	|int	|||
 |chrScaleFactor|	Chromosome scale factor	|float|| (CHANGED FROM V8)|	
 
-#### Normalization vectors (indexed)
+#### Normalization vector index
 | Field |	Description|	Type |	Value | v9 change | 
 |------|------------|------|-------|---------|
 |nNormVectors|	Number of normalization vectors |	int|||
@@ -230,10 +232,15 @@ A block represents a square sub-matrix of a contact map.
 |chrIdx|	Chromosome index	|int|	||
 |unit|	Bin units either FRAG or BP.|	String|	FRAG : BP||
 |binSize	|Resolution 	|int|||	
-|position|	File position of value array|	long	|||
+|position|	File position of value array, described below|	long	|||
 |nBytes|	Size in bytes of value array	| long	|| (CHANGED FROM V8)|
-||
-|*Normalization vector arrays (repeat for each entry above)*|
+
+#### Normalization vector arrays
+
+**The normalization index position value points to a value array**
+
+| Field |	Description|	Type |	Value | v9 change | 
+|------|------------|------|-------|---------|
 |nValues|	Number of values in array|	long||	(CHANGED FROM V8)|
 ||
 |*Normalization vector values (n=  nValues)*|
