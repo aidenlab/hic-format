@@ -131,10 +131,10 @@ A block represents a square sub-matrix of a contact map.
 |Field	|Description|	Type|	Value| v9 Change|
 |------|------------|------|-------|---------|
 |nRecords	|Number or contact records in this block|	int	||
-|binXOffset | X offset for the contact records in this block.  The binX value below is relative to this offset.|||
-|binYOffset | Y offset for the contact records in this block.  The binX value below is relative to this offset.|||
+|binColumnOffset | Column offset for the contact records in this block.  The binColumn value below is relative to this offset.|| int |
+|binRowOffset | Row offset for the contact records in this block.  The rowNumber value below is relative to this offset.|| int |
 |useFloatContact | Flag indicating the ```value``` field in contact records for this block are recorded with data type ```float```.  If == 1 a ```float``` is used, otherwise type is ```short```| byte ||
-|useIntXPos | Flag indicating the ```recordCount``` and ```binX``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte || (ADDED FROM v8)|
+|useIntXPos | Flag indicating the ```recordCount``` and ```binColumn``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte || (ADDED FROM v8)|
 |useIntYPos | Flag indicating the ```rowCount``` and ```rowNumber``` fields in contact records for this block are recorded with data type ```int```. If == 1 an ```int``` is used, otherwise type is ```short``` | byte || (ADDED FROM v8)|
 |matrixRepresentation | Representation of matrix used for the contact records.  If == 1 the representation is a ```list of rows```, if == 2 ```dense```. | byte |
 |blockData| The block matrix data.  See descriptions below, also  in the notes section.
@@ -146,14 +146,14 @@ A block represents a square sub-matrix of a contact map.
 |rowCount | Number or rows. The data type is determined by the ```useIntYPos``` flag above. | int : short || (CHANGED FROM V8)|
 ||
 |*repeat for each row (n = rowCount)*
-|rowNumber | Matrix row number, first row is ```0```. The data type is determined by the ```useIntYPos``` flag above. | int : short || (CHANGED FROM V8)|
+|rowNumber | Matrix row number, relative to binRowOffset. First row is ```0```. The data type is determined by the ```useIntYPos``` flag above. | int : short || (CHANGED FROM V8)|
 |recordCount | Number of records for this row. Row is sparse, zeroes are not recorded. The data type is determined by the ```useIntXPos``` flag above. | int : short || (CHANGED FROM V8)|
 ||
-|*repeat for each contact record (n = cellCount)*|
-|binX	|X axis index. The data type is determined by the ```useIntXPos``` flag above. |	int : short|| (CHANGED FROM V8)|
+|*repeat for each contact record (n = recordCount)*|
+|binColumn	|Column index relative to binColumnOffset. The data type is determined by the ```useIntXPos``` flag above. |	int : short|| (CHANGED FROM V8)|
 |value	|Value (counts or score). The data type is determined by the ```useFloat``` flag above.|	float : short|||	
-||
-||
+|*End of loop through contact records (n = recordCount)*|
+|*End of loop through rows (n = rowCount)*|
 
 ##### Block data - dense
 |Field	|Description|	Type|	Value|
@@ -161,8 +161,8 @@ A block represents a square sub-matrix of a contact map.
 |nRecords | Number of contact records in this block.  | int ||
 |w | Width of the dense block.  This can be < the blockSize if the edge columns on either side are zeroes.  See discussion on block representation below | short ||
 ||
-|*contact records (n = nRecords)*||
-|value	|Value (counts or score). The data type is determined by the ```useFloat``` flag above.|	float : short||	
+|*repeat for each contact record (n = nRecords)*||
+|value	|Value (counts or score). The data type is determined by the ```useFloat``` flag above.  ***Note:  no value is flagged by the value -32768 if data type is short, NaN if data type is float***|	float : short||	
 
 ### Footer
 
