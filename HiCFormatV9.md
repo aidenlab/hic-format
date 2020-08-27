@@ -79,10 +79,18 @@
 |*Repeat for each site (n = nSites)*|
 |sitePosition|	Site position in base pairs|	int|||	
 
+
+
+
+
 ## Body
 
 The **Header** section is followed immediatly by the **Body**, which containe the contact map data for each 
 chromosome-chromosome pairing and each  resolution.   
+
+
+
+
 
 ### Matrix metadata
 
@@ -122,6 +130,10 @@ contact data.
 
 ***End of Matrix metadata section***
 
+
+
+
+
 ### Blocks  
 
 A block represents a square sub-matrix of a contact map.   
@@ -157,7 +169,9 @@ A block represents a square sub-matrix of a contact map.
 ||
 |*End of loop through rows (n = rowCount)*|
 
+
 ##### Block data - dense
+
 |Field	|Description|	Type|	Value|
 |------|------------|------|-------|
 |nRecords | Number of contact records in this block.  | int ||
@@ -183,6 +197,8 @@ A block represents a square sub-matrix of a contact map.
 |position	|Position of the start of the chromosome-chromosome matrix record in bytes	|long||	
 |size	|Size of the chromosome-chromsome matrix record in bytes.  This does not include the **Block** data.| int||	
 
+
+
 #### Expected value vectors
 
 | Field |	Description|	Type |	Value | v9 Change|
@@ -201,6 +217,7 @@ A block represents a square sub-matrix of a contact map.
 ||*List of normalization factors (n = nChrScaleFactors)*|||
 |chrIndex|	Chromosome index|	int|||	
 |chrScaleFactor|	Chromosome scale factor	|float||CHANGED FROM v8|	
+
 
 
 #### Normalized expected value vectors
@@ -222,6 +239,9 @@ A block represents a square sub-matrix of a contact map.
 |chrIndex|	Chromosome index	|int	|||
 |chrScaleFactor|	Chromosome scale factor	|float|| (CHANGED FROM V8)|	
 
+
+
+
 #### Normalization vector index
 | Field |	Description|	Type |	Value | v9 change | 
 |------|------------|------|-------|---------|
@@ -235,9 +255,7 @@ A block represents a square sub-matrix of a contact map.
 |position|	File position of value array, described below|	long	|||
 |nBytes|	Size in bytes of value array	| long	|| (CHANGED FROM V8)|
 
-#### Normalization vector arrays
-
-**The normalization index position value points to a value array**
+#### Normalization vector arrays, 1 per normalization vector.
 
 | Field |	Description|	Type |	Value | v9 change | 
 |------|------------|------|-------|---------|
