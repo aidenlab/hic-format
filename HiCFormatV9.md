@@ -30,9 +30,13 @@
 |------|------------|------|-------|------|
 |nAttributes	|Number of key-value pair attributes|	int|||
 ||
-|*Repeat for each attribute (n = nAttributes)*|||
-|key	|Attribute key|	String	|||
-|value|Attribute value|		String|||
+
+
+   |Field | Description |	Type | Value | V9 change |
+   |------|------------|------|-------|------|
+   |*Repeat for each attribute (n = nAttributes)*|||
+   |key	|Attribute key|	String	|||
+   |value|Attribute value|		String|||
 
 #### Chromosome list
 
