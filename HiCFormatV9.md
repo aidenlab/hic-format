@@ -334,19 +334,17 @@ padMax = (binX2 + binY2) / 2 / blockBinCount + 1;
 antiUR = log2(1 + Math.abs(binX1 - binY2) / Math.sqrt(2) / blockBinCount);
 antiLL = log2(1 + Math.abs(binX2 - binY1) / Math.sqrt(2) / blockBinCount);
 ```
-Since the diagonal may be contained in the viewer, we need to calculate
-```
-int centerX = (binX1 + binX2)/2;
-int centerY = (binY1 + binY2)/2;
-int antiCenter = log2(1 + Math.abs(centerX - centerY) / Math.sqrt(2) / blockBinCount);
-```
 We determine the appropriate boundaries for the anti-diagonal axis.
 ```
 antiMin = Math.min(antiLL, antiUR);
-antiMin = Math.min(antiMin, antiCenter);
 antiMax = Math.max(antiLL, antiUR) + 1;
 ```
-
+If the diagonal is contained in the viewer, we explicitly set the lower bound along the anti-diagonal axis.
+```
+if ((binX1 > binY2 && binX2 < binY1) || (binX2 > binY1 && binX1 < binY2)) {
+   antiMin = 0;
+}
+```
 This calculates a permissive region for the viewer to ensure all data is captured for the region,
 resulting in block numbers defined by the (inclusive) boundaries:
 ```
@@ -354,7 +352,6 @@ for each p in [padMin, padMax]
    for each a in [antiMin, antiMax]
       block_number = a * blockColumnCount + p
 ```
-
 
 #### Block matrix representation
 
