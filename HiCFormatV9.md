@@ -325,22 +325,35 @@ block_number = position_along_anti_diagonal * blockColumnCount + positionAlongDi
 Because the 2D heatmap viewers are often at a 45 degree rotation from the representation of the block, it is necessary to identify all the blocks that overlap this region. For a rectangular region spanning binX1 to binX2 and binY1 to binY2, to rotation along the diagonal and antidiagonal correspond to:
 
 ```
-position_along_diagonal1 = (binX1 + binY1) / 2 / blockBinCount;
-position_along_diagonal2 = (binX2 + binY2) / 2 / blockBinCount + 1;
+// pad = position along diagonal
+padMin = (binX1 + binY1) / 2 / blockBinCount;
+padMax = (binX2 + binY2) / 2 / blockBinCount + 1;
 
-position_along_anti_diagonal1 = log2(1 + Math.abs(binX1 - binY2) / Math.sqrt(2) / blockBinCount);
-position_along_anti_diagonal2 = log2(1 + Math.abs(binX2 - binY1) / Math.sqrt(2) / blockBinCount);
-
+// anti = position along anti diagonal
+// UR = upper right corner, LL = lower left corner
+antiUR = log2(1 + Math.abs(binX1 - binY2) / Math.sqrt(2) / blockBinCount);
+antiLL = log2(1 + Math.abs(binX2 - binY1) / Math.sqrt(2) / blockBinCount);
 ```
-Since the diagonal may be contained in the viewer, we may need to calculate
+Since the diagonal may be contained in the viewer, we need to calculate
+```
+int centerX = (binX1 + binX2)/2;
+int centerY = (binY1 + binY2)/2;
+int antiCenter = log2(1 + Math.abs(centerX - centerY) / Math.sqrt(2) / blockBinCount);
+```
+We determine the appropriate boundaries for the anti-diagonal axis.
+```
+antiMin = Math.min(antiLL, antiUR);
+antiMin = Math.min(antiMin, antiCenter);
+antiMax = Math.max(antiLL, antiUR) + 1;
 ```
 
-min_position_along_anti_diagonal = Math.min(position_along_anti_diagonal1, position_along_anti_diagonal2);
-max_position_along_anti_diagonal = Math.max(position_along_anti_diagonal1, position_along_anti_diagonal2) + 1;
-
+This calculates a permissive region for the viewer to ensure all data is captured for the region,
+resulting in block numbers defined by the (inclusive) boundaries:
 ```
-
-This calculates a permissive region for the viewer to ensure all data is captured for the region.
+for each p in [padMin, padMax]
+   for each a in [antiMin, antiMax]
+      block_number = a * blockColumnCount + p
+```
 
 
 #### Block matrix representation
