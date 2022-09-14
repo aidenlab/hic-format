@@ -212,9 +212,9 @@ A block represents a square sub-matrix of a contact map.
 ||
 ||*List of expected values (n = nValues)*|
 |value	|Expected value|	float||	(CHANGED FROM V8)|
-|nChrScaleFactors| Number of chromosome normalization factors| int|||
 ||
-||*List of normalization factors (n = nChrScaleFactors)*|||
+|nChrScaleFactors| Number of chromosome normalization factors| int|||
+||*Map of normalization factors (n = nChrScaleFactors)*|||
 |chrIndex|	Chromosome index|	int|||	
 |chrScaleFactor|	Chromosome scale factor	|float||CHANGED FROM v8|	
 
@@ -233,9 +233,9 @@ A block represents a square sub-matrix of a contact map.
 ||
 |*List of expected values (n = nValues)*|
 |value	|Expected value	|float||	(CHANGED FROM V8)|
-|nChrScaleFactors|Number of normalizatoin factos for this vector||||
 ||
-|*List of normalization factors (n = nChrScaleFactors)*|
+|nChrScaleFactors|Number of normalizatoin factos for this vector||||
+|*Map of normalization factors (n = nChrScaleFactors)*|
 |chrIndex|	Chromosome index	|int	|||
 |chrScaleFactor|	Chromosome scale factor	|float|| (CHANGED FROM V8)|	
 
